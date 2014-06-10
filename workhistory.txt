@@ -1,0 +1,28 @@
+
+2014-06-03, 2014-06-10 
+tracking down relevant commits in various realtycore projects to build a sensible history of work
+on the slidesjs based slideshow resizing and thumbnail nav enhancements
+
+details.js slideshow resizing stuff
+date	site	version
+
+[230]	2014/05/21	rtbahamas	28		I may have finally found a solution for letting the slideshow be squishy while resizing while also keeping the matchmedia orientation listener that is necessary for some mobile devices.
+		+waitForFinalEvent needs to be added to global.js along with this commit
+		
+[220]	2014/05/19	rtbahamas	17		first added to rtbahamas
+[210]	2014/05/07	callenders	207		Isolated reusable styles for slideshows that have thumbnail navigation.
+		Add caption as title on thumbnails (done via js)
+		Make all slideshows fade by default.
+[200]	2014/04/08	callenders	180		(switched back to window-load)
+[190]	2014/04/03	callenders	165		(switched from window-load to document-ready)
+[180]	2014/03/31	callenders	146		Moved centerImage js to global.js
+[170]	2014/03/31	callenders	143		Adjust details slideshow code to compensate for when there is only 1 slide.
+[160]	2014/02/25	grahamreal	264		first added to mobile graham
+[150]	2014/02/01	mobilebrl	1062		added matchmedia and sjs.manualupdate stuff - The slideshow now properly changes height when changing device orientation (tested on iphone safari, android chrome & firefox).
+[140]	2014/01/31	mobilebrl	1056		important comments - Some progress on getting slideshow to size properly when switching orientation. I think it works on chrome android but doesn't get triggered at all on iOS safari. Disabled for now.
+[130]	2014/01/30	mobilebrl	1034		activate navigation option
+[120]	2014/01/29	mobilebrl	1031		Copied code from Callenders... probably removed some stuff that was callenders specific
+[110]	2013/11/29	callenders	104		Put a a setTimeout delay on the resize event code so resizing windows or rotating devices is not sluggish.
+[100]	2013/10/15	callenders	74 		when it was added to callenders
+
+
