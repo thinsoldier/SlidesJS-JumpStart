@@ -25,7 +25,7 @@ jQuery( window ).load( function(){
 		sjs.goto( slide );
 	});
 	
-})
+});
 
 
 // This is run as a callback after full window load and after SlidesJS triggers its load event.

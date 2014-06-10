@@ -5,20 +5,25 @@ jQuery( window ).load( function(){
 	
 	window.mainphotoElement = $('#mainphoto').get(0);
 	
-	$('#slides').slidesjs({
-		//width: 1905,
-		//height: 650,
-		
+	// Slideshow doesn't work if there's only 1 slide. If only 1 then clone the 1 slide.
+	if( $("#slides").children().length < 2 )
+	{ 
+		$("#slides").children().first().clone().addClass('clone_of_sjs_slide_1').appendTo("#slides");
+		var paginavOptionValue = false;
+	} else { var paginavOptionValue = true; }
+	
+	// Create Slideshow.
+	slideshow = $("#slides").slidesjs({
 		width: $('#mainphoto').width(),
 		height: $('#mainphoto').height(),
-		
-		navigation: {active:true},
-		pagination: {active:false},
+      pagination: { active: paginavOptionValue },
+      navigation: { active: paginavOptionValue },
 		play:{auto:false, pauseOnHover: true},
-		effect:{slide:{speed:2000}},
+		effect: { slide: { speed: 3000 } },
 		callback: { loaded: slidetweaks }
 	});
-
+      
+   // sjs is global access to slideshow api.
 	sjs = $('#slides').data('plugin_slidesjs');
 	
 	$('#thumbs a').click( function(e){
@@ -44,7 +49,7 @@ jQuery( window ).load( function(){
 			 console.log('...waitForFinalEvent...uponOrientation');
 		 }, 500, "resize_uponOrientation");
 	});	
-})
+});
 
 
 // This is run as a callback after full window load and after SlidesJS triggers its load event.
@@ -53,7 +58,10 @@ jQuery( window ).load( function(){
 function slidetweaks()
 {
 	var $ = jQuery;
-	
+
+	// Because of where this callback function is executed within 
+	// SlidesJS code I don't have access to sjs variable in here :(
+
 	// put prev & next inside of main slide area so they can be positioned relative to it.
 	$('.slidesjs-navigation').appendTo('.slidesjs-container');
 
