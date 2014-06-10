@@ -5,6 +5,9 @@ The photos in the slideshow navigation is added by my custom code.
 The scrollbar for the slideshow navigation is provided by jScrollPane.
 http://jscrollpane.kelvinluck.com/ & https://github.com/vitch/jScrollPane
 */
+
+
+
 // Slideshow needs to wait until after images are loaded because the images need to be measured.
 $( window ).load( function(){
 //$(document).ready(function() {
@@ -91,7 +94,6 @@ function slidetweaks()
 	}
 }
 
-// ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 
 
 // Put a a setTimeout delay on the resize event code so resizing windows or rotating devices is not sluggish.
@@ -109,6 +111,3 @@ $(window).bind('resize', function(e)
         }, 250);
     });
 });
-
-
-// ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

@@ -5,9 +5,11 @@ The photos in the slideshow navigation is added by my custom code.
 The scrollbar for the slideshow navigation is provided by jScrollPane.
 http://jscrollpane.kelvinluck.com/ & https://github.com/vitch/jScrollPane
 */
+
+
+
 // Slideshow needs to wait until after images are loaded because the images need to be measured.
 $( window ).load( function(){
-//$(document).ready(function() {
 	
 	// Slideshow doesn't work if there's only 1 slide. If only 1 then clone the 1 slide.
 	if( $("#slides").children().length < 2 )
@@ -20,9 +22,9 @@ $( window ).load( function(){
 	slideshow = $("#slides").slidesjs({
         width: 960,
         height: 640,
-        pagination: { active: paginavOptionValue, effect:"fade" },
-        navigation: { active: paginavOptionValue, effect:"fade" },
-        effect: { slide: { speed: 3000 }, fade:{speed:1000} },
+        pagination: { active: paginavOptionValue },
+        navigation: { active: paginavOptionValue },
+        effect: { slide: { speed: 3000 } },
         callback: { loaded: slidetweaks }
       });
       
@@ -95,7 +97,6 @@ function slidetweaks()
 	}
 }
 
-// ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 
 
 // Put a a setTimeout delay on the resize event code so resizing windows or rotating devices is not sluggish.
@@ -113,6 +114,3 @@ $(window).bind('resize', function(e)
         }, 250);
     });
 });
-
-
-// ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

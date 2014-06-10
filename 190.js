@@ -1,27 +1,3 @@
-
-
-$(document).ready(function() {
-	$('.d-act-map a').magnificPopup({type:'iframe', mainClass: 'mfp-fade'});
-  
-	$('.d-act-share a').magnificPopup(
-		{
-			type:'iframe', 
-			mainClass: 'mfp-fade', 
-			removalDelay:400,
-			callbacks: {
-				open: function() {
-			// Will fire when this exact popup is opened
-			// this - is Magnific Popup object
-				}
-		
-			}
-		}
-		);
-  
-});
-
-
-
 /*
 The slideshow is slidesjs 3 - slidesjs.com/
 The slideshow navigation is also a part of slidesjs.
@@ -118,7 +94,6 @@ function slidetweaks()
 	}
 }
 
-// ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 
 
 // Put a a setTimeout delay on the resize event code so resizing windows or rotating devices is not sluggish.
@@ -136,44 +111,3 @@ $(window).bind('resize', function(e)
         }, 250);
     });
 });
-
-
-// ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
-
-
-//----------------------------- 
-// Action buttons
-
-// $('.d-act-map, .d-act-share, .d-act-enquire').click( toggleIframe );
-// $('.d-toggles').click( closeToggles );
-
-
-function toggleIframe( event )
-{
-	event.preventDefault(); 
-	
-	return
-	
-	var $target = $(event.target).closest('div[data-toggletarget]');
-	
-	var $container = $('.d-area-' + $target.data('toggletarget') );
-	
-	if($container.hasClass('d-default'))
-	{
-		$container.removeClass('d-default');
-		var url = $container.find('div').data('iframe');
-		//console.log(url);
-		$container.html('<div class="d-xclose">X</div><iframe src='+url+'></iframe>');
-	}
-	$container.slideToggle();
-}
-
-
-function closeToggles( event )
-{
-	var target = $(event.target);
-	if ( target.hasClass('d-xclose') )
-	{
-		target.parent().slideToggle();
-	}
-}
