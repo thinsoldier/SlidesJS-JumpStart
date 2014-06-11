@@ -33,6 +33,9 @@ jQuery( window ).load( function(){
 		sjs.goto( slide );
 	});
 	
+	// center thumbs
+	$('#thumbs img').each( function(index,element){ centerImage(element); } );
+	
 	
 	$(window).resize(function () {
 		// As soon as you started resizing, set element.height to auto so it is squishy
@@ -107,6 +110,7 @@ function uponOrientation()
 {
 	var $ = jQuery;
 
+	// recenter thumbs
 	$('#thumbs img').each( function(index,element){ centerImage(element); } );
 
 	// Measure the height of the slideshow area (changes via css based on orientations)
