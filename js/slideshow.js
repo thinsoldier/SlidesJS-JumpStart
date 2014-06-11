@@ -16,7 +16,7 @@ jQuery( window ).load( function(){
 	slideshow = $("#slides").slidesjs({
 		width: $('#mainphoto').width(),
 		height: $('#mainphoto').height(),
-      pagination: { active: paginavOptionValue },
+      pagination: { active: false },
       navigation: { active: paginavOptionValue },
 		play:{auto:false, pauseOnHover: true},
 		effect: { slide: { speed: 3000 } },
