@@ -51,6 +51,8 @@ text-align: center;
 }
 
 a.slidesjs-navigation {
+background-color: orange;
+opacity:0.5;
   background-image: url("../images/sprite-arrows.png");
   background-image: url("../images/sprite-arrows.svg");
   background-position: left center;
@@ -61,17 +63,18 @@ a.slidesjs-navigation {
   width: 60px;
   z-index: 10;
 	color: transparent;
+
 }
 
 a.slidesjs-previous {
-left: 10px;
+left: 0px;
 background-position: left center;
 }
 
 
 a.slidesjs-next {
 background-position: right center;
-right: 10px;
+right: 0px;
 }
 
 
