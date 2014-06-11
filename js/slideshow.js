@@ -1,3 +1,12 @@
+jQuery(document).ready(function($) {
+	// Make the thumbs ready to center themselves as soon as they load
+	$('#thumbs img').on('load', function(e){ centerImage(e.target) } );
+	
+	// Force webkit/chrome to trigger a load even for each thumb.
+	// This is faster than waiting for the entire window.load
+	$('#thumbs img').each(function(i,e){ e.src = e.src+'?jsonload' });
+});
+
 
 // Slideshow needs to wait until after images are loaded because the images need to be measured.
 jQuery( window ).load( function(){
@@ -32,9 +41,6 @@ jQuery( window ).load( function(){
 		slide = element.data('sjs');
 		sjs.goto( slide );
 	});
-	
-	// center thumbs
-	$('#thumbs img').each( function(index,element){ centerImage(element); } );
 	
 	
 	$(window).resize(function () {
