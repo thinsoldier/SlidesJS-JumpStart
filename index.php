@@ -57,6 +57,11 @@ $files = explode("\n", $files);
 	
 <script src="js/slideshow.js"></script>
 
+<style>
+body { max-width: 700px; margin: auto; }
+</style>
+
+
 </head>
 
 <body>
@@ -68,7 +73,7 @@ $files = explode("\n", $files);
 <? 
 $format = '<div class="photo-slide">
 	<img class="lazy lazy-unloaded" src="spacer.gif" data-original="%s">
-	<div class="caption"></div>
+	<div class="caption">'.uniqid('Caption Text ').'</div>
 </div>
 ';
 foreach( $files as $f )
