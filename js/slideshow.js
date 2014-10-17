@@ -1,15 +1,31 @@
+// https://github.com/thinsoldier/SlidesJS-JumpStart/releases/tag/v0.2 with changes
+
+var globby = {winHeight:0 , winWidth:0};
+
+var slidesettings = ss = {};
+ss.slider = $("#slides"); // what slidesjs plugin is applied to.
+ss.sizer = $('#mainphoto'); // parent of the slider whose width and height from css control the size of the slider.
+
 jQuery(document).ready(function($) {
-	// Make the thumbs ready to center themselves as soon as they load
-	$('#thumbs img').on('load', function(e){ centerImage(e.target) } );
+	// prepare LazyLoad thumbs then centerImage.
+	$('#thumbs img').lazyload({
+		event:"delayed-lazy-load-event",
+		load:function(){ $(this).removeClass('lazy-unloaded'); centerImage(this); } });
 	
-	// Force webkit/chrome to trigger a load even for each thumb.
-	// This is faster than waiting for the entire window.load
-	$('#thumbs img').each(function(i,e){ e.src = e.src+'?jsonload' });
+	// prepare LazyLoad slide images then centerImageInSlide.
+   $("#mainphoto img.lazy").lazyload({ 
+   	event:"delayed-lazy-load-event",
+   	load:function(){ var img = $(this); var slide = img.closest('.photo-slide'); centerImageInSlide( slide ); }   
+   });
 });
 
 
 // Slideshow needs to wait until after images are loaded because the images need to be measured.
-jQuery( window ).load( function(){
+jQuery( window ).load( create_slideshow );
+
+
+
+function create_slideshow(){
 	var $ = jQuery;
 	
 	window.mainphotoElement = $('#mainphoto').get(0);
@@ -42,8 +58,19 @@ jQuery( window ).load( function(){
 		sjs.goto( slide );
 	});
 	
+	// Initial measure of window.
+	globby.winHeight = window.innerHeight;
+	globby.winWidth = window.innerWidth;
 	
-	$(window).resize(function () {
+	$(window).resize(function (e) {
+		// Re-measure window
+		if( globby.winWidth === window.innerWidth )
+		{ return false; }
+		else {
+			globby.winHeight = window.innerHeight;
+			globby.winWidth = window.innerWidth;
+		}
+		
 		// As soon as you started resizing, set element.height to auto so it is squishy
 		var heightVal = window.mainphotoElement.style.height;
 		if( heightVal != 'auto') { window.mainphotoElement.style.height = 'auto'; }		
@@ -55,29 +82,46 @@ jQuery( window ).load( function(){
 		 {
 			 $('#mainphoto').get(0).style.height = null;
 			 uponOrientation();
-			 console.log('...waitForFinalEvent...uponOrientation');
+			 //console.log('...waitForFinalEvent...uponOrientation');
 		 }, 500, "resize_uponOrientation");
-	});	
-});
+	});
+	
+	
+	// Wait 1 second and then make every lazy image load.
+   var timeout = setTimeout(function() {
+   	$("img.lazy").trigger("delayed-lazy-load-event")
+   }, 1000);
+
+}
 
 
 // This is run as a callback after full window load and after SlidesJS triggers its load event.
-// Because I need to measure the size at which the images are displayed I have to make all 
-// the image parents visible, then measure and center them, then hide them again, except the first one.
+// Because of where this callback function is executed within 
+// SlidesJS code I don't have access to sjs variable in here :(
 function slidetweaks()
 {
 	var $ = jQuery;
 
-	// Because of where this callback function is executed within 
-	// SlidesJS code I don't have access to sjs variable in here :(
-
 	// put prev & next inside of main slide area so they can be positioned relative to it.
 	$('.slidesjs-navigation').appendTo('.slidesjs-container');
 
-	$('.slidesjs-slide').css('display','block');
-	$('.slidesjs-slide img').each( function(index,element){ centerImage(element); } );
-	$('.slidesjs-slide').css('display','none');
-	$('.slidesjs-slide').first().css('display','block');
+ 	$('.slidesjs-slide').each( function(index,element){ centerImageInSlide(element); } );
+}
+
+
+// Because I need to measure the size at which the images are displayed I have to make all 
+// the image parents visible, then measure and center them, then hide them again
+function centerImageInSlide( slide )
+{
+	var $slide = $(slide);
+	
+	var initially_visible = ( 'block' === $slide.css('display') );
+	
+	if(!initially_visible){ $slide.css('display','block'); }
+	
+	$slide.find('img').each( function(index,element){ $(element).removeClass('lazy-unloaded'); centerImage(element); } );
+	
+	if(!initially_visible){ $slide.css('display','none'); }
 }
 
 

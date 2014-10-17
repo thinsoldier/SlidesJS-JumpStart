@@ -1,5 +1,7 @@
 <? 
-$files = "http://brl.xamp/photos/%s/530b816105408.jpg
+$files = 
+"http://paradisebahamas.xamp/photos/large/543f2ec7ed4b4.jpg
+http://brl.xamp/photos/%s/530b816105408.jpg
 http://brl.xamp/photos/%s/510aca8934a6c.jpg
 http://brl.xamp/photos/%s/51083ab609ebd.jpeg
 http://brl.xamp/photos/%s/514894a58b79f.jpeg
@@ -49,6 +51,8 @@ $files = explode("\n", $files);
 
 <script src="js/jquery.slides.js"></script>
 
+<script src="js/jquery.lazyload.js"></script>
+
 <script src="js/global.js"></script>
 	
 <script src="js/slideshow.js"></script>
@@ -63,7 +67,7 @@ $files = explode("\n", $files);
 
 <? 
 $format = '<div class="photo-slide">
-	<img src="%s">
+	<img class="lazy lazy-unloaded" src="spacer.gif" data-original="%s">
 	<div class="caption"></div>
 </div>
 ';
@@ -81,7 +85,7 @@ foreach( $files as $f )
 <? 
 $format = '<li>
 	<a href="%s" data-sjs="%s">
-	<img alt="" src="%s" />
+	<img class="lazy" alt="" src="spacer.gif" data-original="%s" />
 	</a>
 	</li>
 
